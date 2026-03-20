@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+a.active hr{
+    /* this is done so that jab uss page pr honge tabhi humein uske neche hr dikhega  */
+    display:block;  
+}
