@@ -1,6 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
 @import "tailwindcss";
-
 a.active hr{
     /* this is done so that jab uss page pr honge tabhi humein uske neche hr dikhega  */
     display:block;  
+}
+*{
+    font-family: Outfit;
+
+}
+.prata-regular {
+  font-family: "Prata", serif;
+  font-weight: 400;
+  font-style: normal;
 }
