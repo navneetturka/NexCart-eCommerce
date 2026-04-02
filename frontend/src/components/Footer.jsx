@@ -8,7 +8,7 @@ const Footer = () => {
         <div>
             <img src={assets.logo} className='mb-5 w-32' alt="" />
             <p className='w-full md:w-2/3 text-gray-600'>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi neque exercitationem soluta labore cumque deserunt eligendi, distinctio quod itaque optio inventore voluptas voluptates culpa natus nulla atque saepe pariatur eum.
+                Agents that analyze your storefront data, launch tests, and measure revenue lift to improve your site's performance 24/7.
             </p>
         </div>
         <div>
@@ -24,7 +24,7 @@ const Footer = () => {
             <p className='text-xl font-medium mb-5'>GET IN TOUCH</p>
             <ul className='flex flex-col gap-1 text-gray-600'>
                 <li>+91 4567835138</li>
-                <li>contactat@nextcart.com</li>
+                <li>contactat@nexcart.com</li>
             </ul>
         </div>
       </div>
