@@ -1,6 +1,6 @@
-import userModel from "../model/userModel.js";
+import userModel from "../models/userModel.js";
 import validator from "validator";
-import bycrypt from "bycrypt"
+import bcrypt from 'bcrypt';
 //route for user login 
 const loginUser=async (req,res)=>{
 
