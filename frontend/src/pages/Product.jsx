@@ -15,13 +15,13 @@ const Product = () => {
 
   const fetchProductData = async () => {
   // Loop through products to find the one matching the ID from the URL
-  products.map((item) => {
-    if (item._id === productId) {
-      setProductData(item);
-      setImage(item.image[0]);
-      return null;
-    }
-  });
+const fetchProductData = async () => {
+  const item = products.find((item) => item._id === productId);
+  if (item) {
+    setProductData(item);
+    setImage(item.image[0]);
+  }
+};
 };
 
   useEffect(() => {
