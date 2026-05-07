@@ -3,6 +3,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../firebase";
+
+
+
 export const ShopContext = createContext();
 
 const ShopContextProvider = (props) => {
@@ -176,6 +181,43 @@ const ShopContextProvider = (props) => {
       toast.error("Registration failed");
     }
   };
+  
+// ─── Google Login ─────────────────────────────
+const googleLogin = async () => {
+  try {
+
+    const result = await signInWithPopup(auth, googleProvider);
+
+    const user = result.user;
+
+    const response = await axios.post(
+      `${backendUrl}/api/user/google`,
+      {
+        name: user.displayName,
+        email: user.email,
+      }
+    );
+
+    if (response.data.success) {
+
+      const userToken = response.data.token;
+
+      setToken(userToken);
+
+      localStorage.setItem("token", userToken);
+
+      navigate("/");
+
+      toast.success("Google Login Successful 🚀");
+    }
+
+  } catch (error) {
+    console.log(error);
+    toast.error("Google Login Failed");
+  }
+};
+
+
 
   // ─── Auth: Logout ─────────────────────────────────────────────────────────
   const logout = () => {
@@ -227,6 +269,7 @@ const ShopContextProvider = (props) => {
     showSearch,
     setShowSearch,
     navigate,
+    googleLogin,
   };
 
   return (
