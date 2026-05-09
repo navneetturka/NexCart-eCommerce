@@ -2,7 +2,13 @@ import jwt from "jsonwebtoken";
 
 const adminAuth = async (req, res, next) => {
   try {
-    const { token } = req.headers;
+    const tokenFromHeader = req.headers.token;
+    const authHeader = req.headers.authorization;
+    const bearerToken =
+      authHeader && authHeader.startsWith("Bearer ")
+        ? authHeader.slice(7)
+        : null;
+    const token = tokenFromHeader || bearerToken;
 
     if (!token) {
       return res

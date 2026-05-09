@@ -1,11 +1,12 @@
 import multer from "multer";
 
-const storage = multer.diskStorage({
-  filename: function (req, file, callback) {
-    callback(null, file.originalname);
-  },
-});
+// Memory storage: files are kept in RAM as buffers (no disk path required).
+// productController uploads buffers directly to Cloudinary.
+const storage = multer.memoryStorage();
 
-const upload = multer({ storage });
+const upload = multer({
+  storage,
+  limits: { fileSize: 8 * 1024 * 1024 }, // 8 MB per file
+});
 
 export default upload;

@@ -6,6 +6,7 @@ import { ShopContext } from '../context/ShopContext'
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
     const { setShowSearch, getCartCount, token, logout, navigate } = useContext(ShopContext)
+    const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:5174'
 
     return (
         <div className='flex items-center justify-between py-5 font-medium'>
@@ -32,6 +33,14 @@ const Navbar = () => {
             </ul>
 
             <div className='flex items-center gap-6'>
+                <a
+                    href={adminUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className='hidden sm:inline-flex items-center rounded-full border border-gray-400 px-4 py-1.5 text-sm text-gray-800 hover:bg-gray-50 transition-colors'
+                >
+                    Admin Panel
+                </a>
 
                 <img onClick={() => setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
 
@@ -82,6 +91,7 @@ const Navbar = () => {
                     <NavLink onClick={() => setVisible(false)} to='/collection' className='py-2 pl-6 border'>COLLECTION</NavLink>
                     <NavLink onClick={() => setVisible(false)} to='/about' className='py-2 pl-6 border'>ABOUT</NavLink>
                     <NavLink onClick={() => setVisible(false)} to='/contact' className='py-2 pl-6 border'>CONTACT</NavLink>
+                    <a href={adminUrl} target="_blank" rel="noopener noreferrer" onClick={() => setVisible(false)} className='py-2 pl-6 border block'>ADMIN PANEL</a>
                     {token && (
                         <>
                             <NavLink onClick={() => setVisible(false)} to='/orders' className='py-2 pl-6 border'>MY ORDERS</NavLink>

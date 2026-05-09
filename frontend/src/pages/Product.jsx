@@ -13,16 +13,15 @@ const Product = () => {
   const [image, setImage] = useState('');
   const [size, setSize] = useState("");
 
-  const fetchProductData = async () => {
-  // Loop through products to find the one matching the ID from the URL
-const fetchProductData = async () => {
-  const item = products.find((item) => item._id === productId);
-  if (item) {
-    setProductData(item);
-    setImage(item.image[0]);
-  }
-};
-};
+  const fetchProductData = () => {
+    const item = products.find((p) => String(p._id) === String(productId));
+    if (item) {
+      setProductData(item);
+      setImage(item.image[0]);
+    } else {
+      setProductData(null);
+    }
+  };
 
   useEffect(() => {
     if (products.length > 0) {

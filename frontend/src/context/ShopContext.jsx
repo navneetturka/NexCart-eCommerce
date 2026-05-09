@@ -270,6 +270,7 @@ const googleLogin = async () => {
     setShowSearch,
     navigate,
     googleLogin,
+    fetchProducts,
   };
 
   return (
