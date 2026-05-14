@@ -1,54 +1,58 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <div className="bg-gray-100 mt-16 px-6 md:px-16 lg:px-24 py-12">
+    <div className="bg-black text-white mt-16 px-6 md:px-16 lg:px-24 py-12">
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
 
-        {/* LEFT - LOGO + TEXT */}
+        {/* LEFT */}
         <div>
-          <h1 className="text-2xl font-bold text-blue-600 mb-3">
-            🛒 NexCart
-          </h1>
+         <img src={assets.footer} alt="Venzara Logo" />
 
-          <p className="text-gray-600 text-sm leading-6">
-            Agents that analyze your storefront data, launch tests,
-            and measure revenue lift to improve your site's
-            performance 24/7.
+          <p className="text-gray-300 text-sm leading-6">
+            Venzara is your go-to fashion destination for trendy clothing,
+            footwear, and accessories. Wear the vibe. Live Venzara.
           </p>
         </div>
 
-        {/* CENTER - COMPANY */}
+        {/* CENTER */}
         <div>
           <h2 className="text-lg font-semibold mb-4">COMPANY</h2>
 
-          <ul className="space-y-2 text-gray-600 text-sm">
-            <li className="hover:text-black cursor-pointer">Home</li>
-            <li className="hover:text-black cursor-pointer">About Us</li>
-            <li className="hover:text-black cursor-pointer">Delivery</li>
-            <li className="hover:text-black cursor-pointer">Privacy Policy</li>
+          <ul className="space-y-2 text-gray-300 text-sm">
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/orders">Orders</Link></li>
+            <li><Link to="/Contact">Contact Us</Link></li>
           </ul>
         </div>
 
-        {/* RIGHT - CONTACT */}
+        {/* RIGHT */}
         <div>
           <h2 className="text-lg font-semibold mb-4">GET IN TOUCH</h2>
 
-          <p className="text-gray-600 text-sm mb-2">
-            +91 4567835138
+         
+
+          <p className="text-gray-300 text-sm">
+            venzara.fashion@gmail.com
           </p>
 
-          <p className="text-gray-600 text-sm">
-            contact@nexcart.com
-          </p>
+          {/* Social Icons */}
+          <div className="flex gap-4 mt-3 text-lg">
+            <span className="cursor-pointer">📘</span>
+            <span className="cursor-pointer">📸</span>
+            <span className="cursor-pointer">🐦</span>
+          </div>
         </div>
 
       </div>
 
-      {/* Divider */}
-      <div className="border-t mt-10 pt-5 text-center text-sm text-gray-500">
-        © 2026 nexcart.com — All Rights Reserved
+      {/* Bottom */}
+      <div className="border-t border-gray-700 mt-10 pt-5 text-center text-sm text-gray-400">
+        © 2026 venzara.com — All Rights Reserved
       </div>
 
     </div>
