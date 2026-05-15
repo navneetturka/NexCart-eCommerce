@@ -1,144 +1,121 @@
-import React, {use, useContext, useEffect, useState} from 'react'
-import { ShopContext } from '../context/ShopContext';
-import { assets } from '../assets/assets';
-import Title from '../components/Title';
-import ProductItem from '../components/ProductItem';
+import React from "react";
+import { Link } from "react-router-dom";
+import ProductGrid from "../components/ProductGrid";
+import menImg from "../assets/men.jpg";
+import womenImg from "../assets/women.jpg";
+import kidsImg from "../assets/kids.jpg";
+
+const dummyProducts = [
+  {
+    name: "Men Cargo Pants",
+    price: 1399,
+    image: "YOUR_IMAGE_URL",
+  },
+  {
+    name: "Women Dress",
+    price: 2499,
+    image: "YOUR_IMAGE_URL",
+  },
+  {
+    name: "Kids Top",
+    price: 799,
+    image: "YOUR_IMAGE_URL",
+  },
+  {
+    name: "Streetwear Hoodie",
+    price: 1899,
+    image: "YOUR_IMAGE_URL",
+  },
+];
+
+/* CATEGORY CARDS */
+
+const categories = [
+  {
+    title: "Men",
+    image: menImg,
+    path: "/collection/men",
+  },
+
+  {
+    title: "Women",
+    image: womenImg,
+    path: "/collection/women",
+  },
+
+  {
+    title: "Kids",
+    image: kidsImg,
+    path: "/collection/kids",
+  },
+];
 
 const Collection = () => {
-  // To get data of all products using context api
-
-  // State variables
-  const {products, search, showSearch} = useContext(ShopContext);
-  const [showFilter,setShowFilter]=useState(false);
-  const [filterProducts,setFilterProducts]=useState([]);
-  const [category,setCategory]=useState([]);
-  const [subCategory,setSubCategory]=useState([]);
-  const [sortType,setSortType]=useState('relavent')
-
-  //toggle functions, saving data in category and subcategory
-  const toggleCategory = (e) =>{
-    if (category.includes(e.target.value)) {
-      setCategory(prev=> prev.filter(item=>item !== e.target.value))
-    }
-    else{
-      setCategory(prev => [...prev,e.target.value])
-    }
-  }
-  const toggleSubCategory = (e) =>{
-    if (subCategory.includes(e.target.value)) {
-      setSubCategory(prev=> prev.filter(item=>item !== e.target.value))
-    }
-    else{
-      setSubCategory(prev => [...prev,e.target.value])
-    }
-  }
-  //filter is applied with function
-  const applyFilter = () =>{
-    let productsCopy = products.slice();
-    if(showSearch && search)
-    {
-      productsCopy=productsCopy.filter(item=>item.name.toLowerCase().includes(search.toLowerCase()))
-    }
-
-    if (category.length>0) {
-      productsCopy =productsCopy.filter(item => category.includes(item.category))
-    }
-    if(subCategory.length>0){
-      productsCopy =productsCopy.filter(item => subCategory.includes(item.subCategory))
-    }
-    setFilterProducts(productsCopy);
-  }
-  const sortProduct=()=>{
-    let fpcopy=filterProducts.slice();
-    switch(sortType){
-      case 'low-high':
-        setFilterProducts(fpcopy.sort((a,b)=>(a.price-b.price)))
-        break;
-        case'high-low':
-          setFilterProducts(fpcopy.sort((a,b)=>(b.price-a.price)))
-          break;
-          default:
-            applyFilter();
-            break;
-    }
-  }
-  useEffect(()=>{
-    applyFilter();
-  },[category,subCategory,search,showSearch,products])
-  useEffect(()=>{
-    sortProduct();
-  },[sortType])
-
-  //the category which we check is store in the category array
-  // useEffect(()=>{
-  //   console.log(subCategory);
-  // },[subCategory])
-
   return (
-    <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
+    <div className="px-6 md:px-16 py-10">
 
-      {/* Filter options */}
-      <div className='min-w-60'>
-        <p onClick={()=>setShowFilter(!showFilter)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS
-          <img className={`h-3 sm:hidden ${showFilter ? 'rotate-90':''}`} src={assets.dropdown_icon} alt="" />
+      {/* HEADING */}
+
+      <div className="text-center mb-12">
+
+        <h1 className="text-4xl font-semibold">
+          COLLECTIONS
+        </h1>
+
+        <p className="text-gray-500 mt-2">
+          Explore fashion categories & latest styles
         </p>
 
-        {/* Category Filter */}
-        {/* dynamic classname that will be updated using the state variable */}
-        <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilter ? '':'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Men'} onChange={toggleCategory} /> Men
-            </p>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Women'} onChange={toggleCategory}/> Women
-            </p>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Kids'} onChange={toggleCategory}/> Kids
-            </p>
-          </div>
-        </div>
-
-        {/* Subcategory Filter */}
-        <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '':'hidden'} sm:block`}>
-          <p className='mb-3 text-sm font-medium'>TYPE</p>
-          <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Topwear'} onChange={toggleSubCategory}/> Topwear
-            </p>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Bottomwear' } onChange={toggleSubCategory}/> Bottomwear
-            </p>
-            <p className='flex gap-2'>
-              <input className='w-3' type="checkbox" value={'Winterwear'} onChange={toggleSubCategory}/> Winterwear
-            </p>
-          </div>
-        </div>
       </div>
 
-      {/* Right Side */}
-      <div className='flex-1'>
-        <div className='flex justify-between text-base sm:text-2xl mb-4'>
-          <Title text1={'ALL'} text2={'COLLECTIONS'}/>
-          {/* Product Sort */}
-          <select onChange={(e)=>setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2'>
-            <option value="relavent">Sort by: Relavent</option>
-            <option value="low-high">Sort by: Low to High</option>
-            <option value="high-low">Sort by: High to Low</option>
-          </select>
-        </div>
-          {/* Map Products */}
-        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
-          {
-            filterProducts.map((item,index)=>(
-              <ProductItem key={index} name={item.name} id={item._id} price={item.price} image={item.image}/>
-            ))
-          }
-        </div>
+      {/* CATEGORY CARDS */}
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+
+        {categories.map((item, index) => (
+
+          <Link to={item.path} key={index}>
+
+            <div className="relative overflow-hidden rounded-2xl group cursor-pointer shadow-md">
+
+              <img
+                src={item.image}
+                alt={item.title}
+                className="h-[500px] w-full object-cover group-hover:scale-110 transition duration-500"
+              />
+
+              {/* OVERLAY */}
+
+              <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+
+                <h2 className="text-white text-5xl font-bold tracking-wide">
+                  {item.title}
+                </h2>
+
+              </div>
+
+            </div>
+
+          </Link>
+
+        ))}
+
       </div>
+
+      {/* TRENDING PRODUCTS */}
+
+      <div className="mb-8">
+
+        <h2 className="text-2xl font-semibold mb-6">
+          Trending Products
+        </h2>
+
+        <ProductGrid products={dummyProducts} />
+
+      </div>
+
     </div>
-  )
-}
+  );
+};
 
-export default Collection
+export default Collection;

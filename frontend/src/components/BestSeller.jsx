@@ -5,12 +5,12 @@ import ProductItem from './ProductItem';
 
 const BestSeller = () => {
 
-    const{products}=useContext(ShopContext);//context api used to get products data
-    const [bestSeller,setBestSeller]=useState([]);//where bestseller property is true
+    const{products}=useContext(ShopContext);
+    const [bestSeller,setBestSeller]=useState([]);
 
     useEffect(()=>{
-        const bestProduct=products.filter((item)=>(item.bestseller));//filter method storing bestseller product in bestProduct
-        setBestSeller(bestProduct.slice(0,5))//setter func, slice method to displayupto 5 bestsellers
+        const bestProduct=products.filter((item)=>(item.bestseller));
+        setBestSeller(bestProduct.slice(0,5))
     },[])
   return (
     <div className='my-10'>
